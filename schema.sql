@@ -1,8 +1,8 @@
 -- psql -d expenses < schema.sql
 -- \i ~/Documents/LS/RB185/demo_project/schema.sql
 
-DROP TABLE IF EXISTS lists;
 DROP TABLE IF EXISTS todos;
+DROP TABLE IF EXISTS lists;
 
 CREATE TABLE lists (
   id serial PRIMARY KEY,
