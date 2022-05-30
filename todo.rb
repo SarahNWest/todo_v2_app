@@ -1,5 +1,3 @@
-# /Documents/LS/RB185/sinatra_todos_final_r20160624/170-sinatra-todos-final
-require 'bundler/setup'
 require "sinatra"
 require "sinatra/reloader"
 require "sinatra/content_for"
@@ -43,24 +41,8 @@ helpers do
   end
 end
 
-class SessionPersistence
-
-  def initialize(session)
-    @session = session
-    @session[:lists] ||= []
-  end
-
-  def find_list
-    @session[:lists].find{ |list| list[:id] == id }
-  end
-
-  def all_lists
-    @session[:lists]
-  end
-end
-
 def load_list(id)
-  list = @storage.find_list(id)
+  list = session[:lists].find{ |list| list[:id] == id }
   return list if list
 
   session[:error] = "The specified list was not found."
@@ -72,7 +54,7 @@ end
 def error_for_list_name(name)
   if !(1..100).cover? name.size
     "List name must be between 1 and 100 characters."
-  elsif @storage.all_lists.any? { |list| list[:name] == name }
+  elsif session[:lists].any? { |list| list[:name] == name }
     "List name must be unique."
   end
 end
@@ -90,7 +72,7 @@ def next_element_id(elements)
 end
 
 before do
-  @storage = SessionPersistence.new(session)
+  session[:lists] ||= []
 end
 
 get "/" do
