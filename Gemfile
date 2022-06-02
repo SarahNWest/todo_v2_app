@@ -8,3 +8,4 @@ gem "erubis"
 gem "webrick"
 
 gem "pg"
+gem "pry"
