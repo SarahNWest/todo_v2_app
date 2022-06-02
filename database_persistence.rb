@@ -59,9 +59,8 @@ class DatabasePersistence
   end
 
   def update_todo_status(list_id, todo_id, new_status)
-    # list = find_list(list_id)
-    # todo = list[:todos].find { |t| t[:id] == todo_id }
-    # todo[:completed] = new_status
+    sql = "UPDATE todos SET completed = $1 WHERE id = $2 AND list_id = $3"
+    query(sql, new_status, todo_id, list_id)
   end
 
   def mark_all_todos_as_completed(list_id)
