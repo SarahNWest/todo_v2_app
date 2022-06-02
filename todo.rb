@@ -72,7 +72,7 @@ end
 
 before do
   # @storage = SessionPersistence.new(session)
-  @storage = DatabasePersistence.new
+  @storage = DatabasePersistence.new(logger)
 end
 
 get "/" do
