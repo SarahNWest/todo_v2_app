@@ -46,14 +46,11 @@ class DatabasePersistence
   def update_list_name(id, list_name)
     sql = "UPDATE lists SET name = $2 WHERE id = $1"
     query(sql, id, list_name)
-    # list = find_list(id)
-    # list[:name] = list_name
   end
 
   def create_new_todo(list_id, todo_name)
-    # list = find_list(list_id)
-    # id = next_element_id(list[:todos])
-    # list[:todos] << { id: id, name: todo_name, completed: false }
+    sql = "INSERT INTO todos (name, list_id) VALUES ($2, $1)"
+    query(sql, list_id, todo_name)
   end
 
   def delete_todo_from_list(list_id, todo_id)
