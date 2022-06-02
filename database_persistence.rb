@@ -49,7 +49,7 @@ class DatabasePersistence
   end
 
   def create_new_todo(list_id, todo_name)
-    sql = "INSERT INTO todos (name, list_id) VALUES ($2, $1)"
+    sql = "INSERT INTO todos (list_id, name) VALUES ($1, $2)"
     query(sql, list_id, todo_name)
   end
 
