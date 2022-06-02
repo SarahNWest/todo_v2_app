@@ -1,17 +1,23 @@
-
+require "pg"
 
 class DatabasePersistence
-  def initialize(session)
-    # @session = session
-    # @session[:lists] ||= []
+  def initialize
+    @db = PG.connect(dbname: "todos")
   end
 
   def find_list(id)
-    # @session[:lists].find{ |list| list[:id] == id }
+    sql = "SELECT * FROM lists WHERE id = $1"
+    result = @db.exec_params(sql, [id])
+    tuple = result.first
+    {id: tuple["id"], name: tuple["name"], todos: []}
   end
 
   def all_lists
-    # @session[:lists]
+    sql = "SELECT * FROM lists"
+    result = @db.exec(sql)
+    result.map do |tuple|
+      {id: tuple["id"], name: tuple["name"], todos: []}
+    end
   end
 
   def create_new_list(list_name)
@@ -49,7 +55,7 @@ class DatabasePersistence
     # list = find_list(list_id)
     # list[:todos].each do |todo|
       todo[:completed] = true
-    end
+    # end
   end
 
   private
