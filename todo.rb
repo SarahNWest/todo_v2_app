@@ -89,6 +89,10 @@ get "/lists" do
   erb :lists, layout: :layout
 end
 
+get "/lists/" do
+  redirect "/lists"
+end
+
 # Render the new list form
 get "/lists/new" do
   erb :new_list, layout: :layout
