@@ -54,8 +54,8 @@ class DatabasePersistence
   end
 
   def delete_todo_from_list(list_id, todo_id)
-    # list = find_list(list_id)
-    # list[:todos].reject! { |todo| todo[:id] == todo_id }
+    sql = "DELETE FROM todos WHERE list_id = $1 AND id =  $2"
+    query(sql, list_id, todo_id)
   end
 
   def update_todo_status(list_id, todo_id, new_status)
