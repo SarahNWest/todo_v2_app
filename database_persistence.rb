@@ -72,6 +72,10 @@ class DatabasePersistence
     query(sql, list_id)
   end
 
+  def disconnect
+    @db.close
+  end
+
   private
 
   def find_list_todos(list_id)
@@ -85,8 +89,4 @@ class DatabasePersistence
         list_id: tuple["list_id"]}
     end
   end
-end
-
-def disconnect
-  @db.close
 end
