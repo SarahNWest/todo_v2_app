@@ -4,8 +4,6 @@ require "tilt/erubis"
 
 require_relative "database_persistence"
 
-require "pry"
-
 configure do
   enable :sessions
   set :session_secret, 'secret'
