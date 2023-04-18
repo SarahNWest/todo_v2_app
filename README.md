@@ -54,16 +54,16 @@ This involves dynamically creating SQL statements.
 | result.field_values(column) |	Returns an Array of values for column, one for each row in result |
 | result.column_values(index) |	Returns an Array of values for column at index, one for each row in result |
 
-adding a schema to the database
+### Adding a schema to the database
 
 from command line
 ```
-psql -d expenses < schema.sql
+psql -d todos < schema.sql
 ```
 
 from postgres interface (replace the file path with the location of the schema file)
 ```
-\i ~/Documents/LS/RB185/demo_project/schema.sql
+\i ~/Documents/Coding/todo_v2_app/schema.sql
 ```
 
 ### Database design
