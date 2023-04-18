@@ -33,7 +33,7 @@ bundle exec ruby todo.rb
 **Note**
 Using bundle exec to execute the file ensures that the file is executed using the correct gem versions. You can have multiple versions of a gem installed in your operating system and Bundler is used to isolate the applications gem dependancies from other gems installed on your system.
 
-## What this project accomplishes
+## Using a Postgres database
 
 This application moves from using session persistence through cookies to using a psql database for data persistence.
 
@@ -56,13 +56,28 @@ This involves dynamically creating SQL statements.
 
 adding a schema to the database
 
-
 from command line
 ```
 psql -d expenses < schema.sql
 ```
+
 from postgres interface (replace the file path with the location of the schema file)
 ```
 \i ~/Documents/LS/RB185/demo_project/schema.sql
 ```
 
+### Database design
+
+There are two tables with a one to many relationship. Todos references the primary key of the lists table. To keep referential integrity we included the constraints `NOT NULL` and `ON DELETE CASCADE`.
+
+The names for lists and todos use the type `text` because the length of the names is unknown.
+
+### Preventing SQL injection
+
+instead of using  `PG::Connection#exec` to execute SQL statements this project uses `PG::Connection#exec_params`.
+
+See the `query` method in the `DatabasePersistence` class.
+
+### N + 1 Queries
+
+Made database interactions more efficient by making SQL queries more specialized.
