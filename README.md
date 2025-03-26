@@ -9,7 +9,7 @@ You need to have ruby 3.1.2 installed. You also need to have postgres installed.
 run
 
 ```
-git clone https://github.com/SarahBunker/todo_v2_app.git
+git clone git@github.com:SarahNWest/todo_v2_app.git
 ```
 
 from your terminal.
